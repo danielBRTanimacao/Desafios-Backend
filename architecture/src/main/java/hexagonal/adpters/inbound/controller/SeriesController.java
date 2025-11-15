@@ -1,7 +1,8 @@
 package hexagonal.adpters.inbound.controller;
 
+import hexagonal.DTO.RequestSeriesDTO;
 import hexagonal.domain.Series;
-import hexagonal.application.service.SeriesService;
+import hexagonal.application.service.SeriesServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/")
 @RequiredArgsConstructor
 public class SeriesController {
-    private final SeriesService seriesService;
+    private final SeriesServiceImpl seriesService;
 
     @GetMapping
     public ResponseEntity<List<Series>> getAllSeries() {
@@ -22,10 +23,8 @@ public class SeriesController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createNewSeries(@Valid @RequestBody Series data) {
-        Series series = new Series();
-        series.setName(data.getName());
-        series.setNote(data.getNote());
+    public ResponseEntity<?> createNewSeries(@Valid @RequestBody RequestSeriesDTO data) {
+        Series series = new Series(data.name(), data.note());
         seriesService.createSeries(series);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }

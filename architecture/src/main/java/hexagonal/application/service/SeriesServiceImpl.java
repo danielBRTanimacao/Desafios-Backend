@@ -1,7 +1,8 @@
 package hexagonal.application.service;
 
+import hexagonal.application.usecase.SeriesUseCase;
 import hexagonal.domain.Series;
-import hexagonal.adpters.outbound.repository.JpaSeriesRepository;
+import hexagonal.domain.SeriesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +10,17 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SeriesService {
-    private final JpaSeriesRepository seriesRepository;
+public class SeriesServiceImpl implements SeriesUseCase {
+    private final SeriesRepository repository;
 
+    @Override
     public List<Series> findAllSeries() {
-        return seriesRepository.findAll();
+        return repository.findAll();
     }
 
+    @Override
     public void createSeries(Series data) {
-        seriesRepository.save(data);
+        repository.save(data);
     }
 
 }
