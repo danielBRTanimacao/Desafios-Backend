@@ -14,10 +14,9 @@ public class SeriesRepositoryImpl implements SeriesRepository {
     private final JpaSeriesRepository repository;
 
     @Override
-    public Series save(Series data) {
+    public void save(Series data) {
         JpaSeriesEntity eventEntity = new JpaSeriesEntity(data);
         repository.save(eventEntity);
-        return new Series();
     }
 
     @Override
