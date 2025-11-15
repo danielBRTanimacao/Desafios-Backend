@@ -1,5 +1,6 @@
 package hexagonal.adpters.outbound.entity;
 
+import hexagonal.domain.Series;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +26,13 @@ public class JpaSeriesEntity {
     private LocalDateTime created_at;
     @LastModifiedDate
     private LocalDateTime updated_at;
+
+    public JpaSeriesEntity() {}
+
+    public JpaSeriesEntity(Series data) {
+        this.name = data.getName();
+        this.note = data.getNote();
+        this.created_at = data.getCreated_at();
+        this.updated_at = data.getUpdated_at();
+    }
 }

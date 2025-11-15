@@ -2,7 +2,7 @@ package hexagonal.domain;
 
 import java.time.LocalDateTime;
 
-public class SeriesEntity {
+public class Series {
     private Long id;
 
     private String name;
@@ -11,14 +11,14 @@ public class SeriesEntity {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    public SeriesEntity() {}
+    public Series() {}
 
-    public SeriesEntity(
+    public Series(
             String name,
             double note
     ) {}
 
-    public SeriesEntity(
+    public Series(
             Long id,
             String name,
             double note,

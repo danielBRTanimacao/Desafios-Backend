@@ -1,7 +1,6 @@
-package hexagonal.adpters.inbound.outbound.controller;
+package hexagonal.adpters.inbound.controller;
 
-import hexagonal.DTOs.RequestSeriesDTO;
-import hexagonal.domain.SeriesEntity;
+import hexagonal.domain.Series;
 import hexagonal.application.service.SeriesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,15 +17,15 @@ public class SeriesController {
     private final SeriesService seriesService;
 
     @GetMapping
-    public ResponseEntity<List<SeriesEntity>> getAllSeries() {
+    public ResponseEntity<List<Series>> getAllSeries() {
         return ResponseEntity.ok().body(seriesService.findAllSeries());
     }
 
     @PostMapping
-    public ResponseEntity<?> createNewSeries(@Valid @RequestBody RequestSeriesDTO data) {
-        SeriesEntity series = new SeriesEntity();
-        series.setName(data.name());
-        series.setNote(data.note());
+    public ResponseEntity<?> createNewSeries(@Valid @RequestBody Series data) {
+        Series series = new Series();
+        series.setName(data.getName());
+        series.setNote(data.getNote());
         seriesService.createSeries(series);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
