@@ -1,4 +1,4 @@
-package hexagonal.infrastructure.config;
+package hexagonal.infra.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

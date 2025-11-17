@@ -1,4 +1,4 @@
-package hexagonal.infrastructure.config.exceptions;
+package hexagonal.infra.exceptions;
 
 
 import org.springframework.http.HttpStatus;

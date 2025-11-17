@@ -16,7 +16,10 @@ public class Series {
     public Series(
             String name,
             double note
-    ) {}
+    ) {
+        this.name = name;
+        this.note = note;
+    }
 
     public Series(
             Long id,
@@ -24,7 +27,13 @@ public class Series {
             double note,
             LocalDateTime created_at,
             LocalDateTime updated_at
-    ) {}
+    ) {
+        this.id = id;
+        this.name = name;
+        this.note = note;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
 
     public Long getId() {
         return this.id;

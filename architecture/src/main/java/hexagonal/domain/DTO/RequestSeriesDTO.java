@@ -1,4 +1,4 @@
-package hexagonal.DTO;
+package hexagonal.domain.DTO;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
