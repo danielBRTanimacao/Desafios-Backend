@@ -16,18 +16,24 @@ public class SeriesRepositoryImpl implements SeriesRepository {
     private final JpaSeriesRepository repository;
 
     @Override
-    public JpaSeriesEntity save(Series data) {
+    public void save(Series data) {
         JpaSeriesEntity eventEntity = new JpaSeriesEntity();
         eventEntity.setName(data.getName());
         eventEntity.setNote(data.getNote());
-        return repository.save(eventEntity);
+        repository.save(eventEntity);
     }
 
     @Override
-    public List<JpaSeriesEntity> findAll() {
+    public List<Series> findAll() {
         return repository.findAll()
                 .stream()
-                .map(entity -> new JpaSeriesEntity())
+                .map(entity -> new Series(
+                        entity.getId(),
+                        entity.getName(),
+                        entity.getNote(),
+                        entity.getCreated_at(),
+                        entity.getUpdated_at()
+                ))
                 .collect(Collectors.toList());
     }
 }

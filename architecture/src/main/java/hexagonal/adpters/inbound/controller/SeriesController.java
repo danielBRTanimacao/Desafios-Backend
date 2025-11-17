@@ -19,13 +19,14 @@ public class SeriesController {
     private final SeriesServiceImpl seriesService;
 
     @GetMapping
-    public ResponseEntity<List<JpaSeriesEntity>> getAllSeries() {
+    public ResponseEntity<List<Series>> getAllSeries() {
         return ResponseEntity.ok().body(seriesService.findAllSeries());
     }
 
     @PostMapping
     public ResponseEntity<?> createNewSeries(@Valid @RequestBody RequestSeriesDTO data) {
         Series series = new Series(data.name(), data.note());
-        return new ResponseEntity<>(seriesService.createSeries(series), HttpStatus.CREATED);
+        seriesService.createSeries(series);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

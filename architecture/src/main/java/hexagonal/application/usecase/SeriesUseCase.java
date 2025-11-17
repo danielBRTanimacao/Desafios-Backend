@@ -6,6 +6,6 @@ import hexagonal.domain.Series;
 import java.util.List;
 
 public interface SeriesUseCase {
-    List<JpaSeriesEntity> findAllSeries();
-    JpaSeriesEntity createSeries(Series data);
+    List<Series> findAllSeries();
+    void createSeries(Series data);
 }

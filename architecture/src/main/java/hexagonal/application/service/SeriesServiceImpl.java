@@ -15,13 +15,13 @@ public class SeriesServiceImpl implements SeriesUseCase {
     private final SeriesRepository repository;
 
     @Override
-    public List<JpaSeriesEntity> findAllSeries() {
+    public List<Series> findAllSeries() {
         return repository.findAll();
     }
 
     @Override
-    public JpaSeriesEntity createSeries(Series data) {
-        return repository.save(data);
+    public void createSeries(Series data) {
+        repository.save(data);
     }
 
 }
