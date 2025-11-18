@@ -1,0 +1,3 @@
+const copyTxt = () => {
+    return null;
+};
