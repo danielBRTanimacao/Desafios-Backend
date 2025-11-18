@@ -14,7 +14,7 @@ public interface LinkController {
     @GetMapping
     ResponseEntity<List<LinkEntity>> getAllLinks();
     @GetMapping("/{id}")
-    ResponseEntity<LinkEntity> getSpecificLink(@PathVariable Long id);
+    ResponseEntity<ResponseLinkDTO> getSpecificLink(@PathVariable Long id);
     @PostMapping
     ResponseEntity<ResponseLinkDTO> createNewLink(@Valid @RequestBody RequestLinkDTO data);
 }

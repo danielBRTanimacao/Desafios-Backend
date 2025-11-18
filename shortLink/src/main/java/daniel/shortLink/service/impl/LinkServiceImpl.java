@@ -5,6 +5,7 @@ import daniel.shortLink.entity.LinkEntity;
 import daniel.shortLink.exceptions.customs.NotFoundException;
 import daniel.shortLink.repository.LinkRepository;
 import daniel.shortLink.service.LinkService;
+import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,14 @@ import java.util.List;
 public class LinkServiceImpl implements LinkService {
 
     private final LinkRepository repository;
+    private final Hashids hashids;
+
     @Value("${app.domain}")
     private String domain;
 
-    public LinkServiceImpl(LinkRepository repository) {
+    public LinkServiceImpl(LinkRepository repository, Hashids hashids) {
         this.repository = repository;
+        this.hashids = hashids;
     }
 
     @Override
@@ -27,13 +31,14 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public LinkEntity getLinkById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Link with id " + id + " not found"));
+    public ResponseLinkDTO getLinkById(Long id) {
+        LinkEntity foundUrl = repository.findById(id).orElseThrow(() -> new NotFoundException("Link with id " + id + " not found"));
+        return new ResponseLinkDTO(foundUrl.getUrl());
     }
 
     @Override
     public ResponseLinkDTO createLink(LinkEntity linkEntity) {
         LinkEntity saved = repository.save(linkEntity);
-        return new ResponseLinkDTO(domain + saved.getId());
+        return new ResponseLinkDTO(domain + hashids.encode(saved.getId()));
     }
 }

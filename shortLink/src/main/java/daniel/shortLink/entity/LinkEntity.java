@@ -1,15 +1,12 @@
 package daniel.shortLink.entity;
 
-//import daniel.shortLink.components.HashIdConverter;
 import jakarta.persistence.*;
-import systems.fehn.boot.starter.hashids.Hashids;
 
 import java.time.LocalDateTime;
 
 @Entity
 public class LinkEntity {
     @Id
-    //@Hashids
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

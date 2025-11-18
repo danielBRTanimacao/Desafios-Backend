@@ -26,7 +26,7 @@ public class LinkControllerImpl implements LinkController {
     }
 
     @Override
-    public ResponseEntity<LinkEntity> getSpecificLink(Long id) {
+    public ResponseEntity<ResponseLinkDTO> getSpecificLink(Long id) {
         return ResponseEntity.ok().body(service.getLinkById(id));
     }
 

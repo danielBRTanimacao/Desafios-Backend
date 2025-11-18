@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface LinkService {
     List<LinkEntity> getAll();
-    LinkEntity getLinkById(Long id);
+    ResponseLinkDTO getLinkById(Long id);
     ResponseLinkDTO createLink(LinkEntity linkEntity);
 }
