@@ -4,6 +4,8 @@ import daniel.shortLink.DTO.RequestLinkDTO;
 import daniel.shortLink.DTO.ResponseLinkDTO;
 import daniel.shortLink.controllers.LinkController;
 import daniel.shortLink.entity.LinkEntity;
+import daniel.shortLink.service.LinkService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,18 +14,26 @@ import java.util.List;
 @RestController
 public class LinkControllerImpl implements LinkController {
 
+    private final LinkService service;
+
+    public LinkControllerImpl(LinkService service) {
+        this.service = service;
+    }
+
     @Override
     public ResponseEntity<List<LinkEntity>> getAllLinks() {
-        return null;
+        return ResponseEntity.ok().body(service.getAll());
     }
 
     @Override
     public ResponseEntity<LinkEntity> getSpecificLink(Long id) {
-        return null;
+        return ResponseEntity.ok().body(service.getLinkById(id));
     }
 
     @Override
     public ResponseEntity<ResponseLinkDTO> createNewLink(RequestLinkDTO data) {
-        return null;
+        LinkEntity linkEntity = new LinkEntity();
+        linkEntity.setUrl(data.url());
+        return new ResponseEntity<>(service.createLink(linkEntity), HttpStatus.CREATED);
     }
 }

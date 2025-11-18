@@ -3,10 +3,9 @@ package daniel.shortLink.controllers;
 import daniel.shortLink.DTO.RequestLinkDTO;
 import daniel.shortLink.DTO.ResponseLinkDTO;
 import daniel.shortLink.entity.LinkEntity;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,8 +13,8 @@ import java.util.List;
 public interface LinkController {
     @GetMapping
     ResponseEntity<List<LinkEntity>> getAllLinks();
-    @GetMapping
-    ResponseEntity<LinkEntity> getSpecificLink(Long id);
+    @GetMapping("/{id}")
+    ResponseEntity<LinkEntity> getSpecificLink(@PathVariable Long id);
     @PostMapping
-    ResponseEntity<ResponseLinkDTO> createNewLink(RequestLinkDTO data);
+    ResponseEntity<ResponseLinkDTO> createNewLink(@Valid @RequestBody RequestLinkDTO data);
 }

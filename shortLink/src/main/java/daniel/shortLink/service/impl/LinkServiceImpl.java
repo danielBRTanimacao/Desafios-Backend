@@ -2,6 +2,7 @@ package daniel.shortLink.service.impl;
 
 import daniel.shortLink.DTO.ResponseLinkDTO;
 import daniel.shortLink.entity.LinkEntity;
+import daniel.shortLink.exceptions.customs.NotFoundException;
 import daniel.shortLink.repository.LinkRepository;
 import daniel.shortLink.service.LinkService;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public LinkEntity getLinkById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Link with id " + id + " not found"));
     }
 
     @Override
