@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/link")
+@RequestMapping("/api/links")
 public interface LinkController {
     @GetMapping
     ResponseEntity<List<LinkEntity>> getAllLinks();

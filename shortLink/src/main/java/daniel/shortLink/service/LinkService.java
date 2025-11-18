@@ -8,5 +8,6 @@ import java.util.List;
 public interface LinkService {
     List<LinkEntity> getAll();
     ResponseLinkDTO getLinkById(Long id);
+    String accessUrlHash(String hash);
     ResponseLinkDTO createLink(LinkEntity linkEntity);
 }

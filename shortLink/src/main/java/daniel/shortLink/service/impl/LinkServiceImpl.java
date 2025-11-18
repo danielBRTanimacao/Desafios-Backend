@@ -37,6 +37,23 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
+    public String accessUrlHash(String hash) {
+        long[] decodedId = hashids.decode(hash);
+
+        if (decodedId.length == 0) {
+            throw new NotFoundException("Link with hash " + hash + " not found");
+        }
+
+        long linkId = decodedId[0];
+
+        LinkEntity foundLink = repository.findById(linkId).orElseThrow(
+                () -> new NotFoundException("Link with id " + linkId + " not found")
+        );
+
+        return foundLink.getUrl();
+    }
+
+    @Override
     public ResponseLinkDTO createLink(LinkEntity linkEntity) {
         LinkEntity saved = repository.save(linkEntity);
         return new ResponseLinkDTO(domain + hashids.encode(saved.getId()));
