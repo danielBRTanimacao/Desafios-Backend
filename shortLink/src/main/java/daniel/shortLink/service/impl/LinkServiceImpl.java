@@ -9,6 +9,7 @@ import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +33,9 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public ResponseLinkDTO getLinkById(Long id) {
-        LinkEntity foundUrl = repository.findById(id).orElseThrow(() -> new NotFoundException("Link with id " + id + " not found"));
+        LinkEntity foundUrl = repository.findById(id).orElseThrow(
+                () -> new NotFoundException("Link with id " + id + " not found")
+        );
         return new ResponseLinkDTO(foundUrl.getUrl());
     }
 
@@ -55,6 +58,7 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public ResponseLinkDTO createLink(LinkEntity linkEntity) {
+        // ValidationComponent.checkValidUrl(linkEntity.getUrl());
         LinkEntity saved = repository.save(linkEntity);
         return new ResponseLinkDTO(domain + hashids.encode(saved.getId()));
     }

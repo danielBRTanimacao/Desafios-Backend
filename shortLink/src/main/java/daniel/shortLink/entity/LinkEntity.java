@@ -1,10 +1,14 @@
 package daniel.shortLink.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class LinkEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,16 +16,12 @@ public class LinkEntity {
 
     private String url;
 
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    public void preCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    @CreatedDate
+    private Instant createdAt;
 
     public boolean isExpired() {
-        LocalDateTime expiredTime = this.createdAt.plusMinutes(5);
-        return LocalDateTime.now().isAfter(expiredTime);
+        Instant expiredTime = this.createdAt.plus(5, ChronoUnit.MINUTES);
+        return Instant.now().isAfter(expiredTime);
     }
 
     public String getUrl() {
@@ -32,7 +32,7 @@ public class LinkEntity {
         this.url = url;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return this.createdAt;
     }
 
@@ -44,7 +44,7 @@ public class LinkEntity {
         this.id = id;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 }
