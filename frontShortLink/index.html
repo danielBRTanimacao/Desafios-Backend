@@ -3,19 +3,52 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./assets/css/index.css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <title>Encurtador</title>
     </head>
     <body>
-        <main>
-            <form method="post" class="flex-form gap-1">
-                <h1 class="txt-center">ENCURTADOR DE URLS</h1>
-                <input type="text" name="link" id="linkId" />
-                <button class="bg-blue btn" type="submit">Criar</button>
+        <main class="h-[100dvh] flex flex-col justify-center">
+            <form
+                method="post"
+                class="flex items-center flex-col gap-2"
+                id="submitForm"
+            >
+                <h1 class="text-2xl font-bold">ENCURTADOR DE URLS</h1>
+                <input
+                    required
+                    type="text"
+                    class="w-[25%] border-1 rounded-sm"
+                    name="url"
+                    id="linkId"
+                />
+                <button
+                    class="bg-blue-600 text-white w-[25%] py-2 cursor-pointer"
+                    type="submit"
+                >
+                    Criar
+                </button>
             </form>
-            <article class="txt-center hidden">
-                <h3>Seu link vai durar 5 minutos</h3>
-                <h1>link</h1>
+            <article
+                class="text-center mt-5 pt-5 flex justify-center items-center"
+            >
+                <aside id="fieldLink" class="bg-gray-200 w-[25%] py-2 hidden">
+                    <h3 class="opacity-75">Seu link vai durar 5 minutos</h3>
+                    <h1 class="text-xl pt-2">
+                        <span id="newLink" class="font-bold"
+                            >127.0.0.1:8080/HGSluhs</span
+                        >
+                        <button
+                            onclick="copyTxt()"
+                            class="ps-2 cursor-pointer hover:opacity-75 transition-all"
+                        >
+                            <img
+                                src="./assets/images/icon/copy.png"
+                                alt="copy-icon-png"
+                                width="18"
+                            />
+                        </button>
+                    </h1>
+                </aside>
             </article>
         </main>
     </body>
