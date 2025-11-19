@@ -1,4 +1,4 @@
-package daniel.shortLink.infra;
+package daniel.shortLink.infra.hash;
 
 import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
