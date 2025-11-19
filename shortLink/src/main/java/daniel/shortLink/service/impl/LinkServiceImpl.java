@@ -1,7 +1,9 @@
 package daniel.shortLink.service.impl;
 
 import daniel.shortLink.DTO.ResponseLinkDTO;
+import daniel.shortLink.components.ValidationComponent;
 import daniel.shortLink.entity.LinkEntity;
+import daniel.shortLink.exceptions.customs.InvalidAttributesException;
 import daniel.shortLink.exceptions.customs.NotFoundException;
 import daniel.shortLink.repository.LinkRepository;
 import daniel.shortLink.service.LinkService;
@@ -9,7 +11,6 @@ import org.hashids.Hashids;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -58,7 +59,9 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public ResponseLinkDTO createLink(LinkEntity linkEntity) {
-        // ValidationComponent.checkValidUrl(linkEntity.getUrl());
+        if (!ValidationComponent.checkValidUrl(linkEntity.getUrl())) {
+            throw new InvalidAttributesException("Invalid link url");
+        }
         LinkEntity saved = repository.save(linkEntity);
         return new ResponseLinkDTO(domain + hashids.encode(saved.getId()));
     }

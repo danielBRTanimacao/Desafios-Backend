@@ -1,5 +1,6 @@
 package daniel.shortLink.exceptions;
 
+import daniel.shortLink.exceptions.customs.InvalidAttributesException;
 import daniel.shortLink.exceptions.customs.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,23 @@ public class CustomExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidAttributesException.class)
+    public ResponseEntity<Map<String, String>> onInvalidAttribute(
+            InvalidAttributesException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> onIllegalArgumentException(
+            IllegalArgumentException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
