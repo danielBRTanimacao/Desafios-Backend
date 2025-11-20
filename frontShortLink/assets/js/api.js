@@ -8,11 +8,11 @@ submitForm.addEventListener("submit", (event) => {
     fieldLink.classList.remove("hidden");
 });
 
-const postLink = () => {
+const postLink = async () => {
     const data = new FormData(submitForm);
     const formProps = Object.fromEntries(data);
 
-    fetch("http://127.0.0.1:8080/api/links", {
+    const res = await fetch("http://127.0.0.1:8080/api/links", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

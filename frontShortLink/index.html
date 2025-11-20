@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/assets/css/index.css" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <title>Encurtador</title>
     </head>
@@ -10,19 +11,19 @@
         <main class="h-[100dvh] flex flex-col justify-center">
             <form
                 method="post"
-                class="flex items-center flex-col gap-2"
+                class="flex items-center flex-col gap-3"
                 id="submitForm"
             >
                 <h1 class="text-2xl font-bold">ENCURTADOR DE URLS</h1>
                 <input
                     required
                     type="text"
-                    class="w-[25%] border-1 rounded-sm"
+                    class="input w-[25%] border-1 rounded-sm p-2 outline-none"
                     name="url"
                     id="linkId"
                 />
                 <button
-                    class="bg-blue-600 text-white w-[25%] py-2 cursor-pointer"
+                    class="input-btn bg-blue-600 text-white w-[25%] py-2 cursor-pointer"
                     type="submit"
                 >
                     Criar
