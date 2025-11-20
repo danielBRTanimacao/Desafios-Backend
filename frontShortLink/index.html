@@ -32,12 +32,14 @@
             <article
                 class="text-center mt-5 pt-5 flex justify-center items-center"
             >
+                <h3
+                    id="raiseError"
+                    class="text-red-600 bg-red-100 w-[25%] py-2 hidden"
+                ></h3>
                 <aside id="fieldLink" class="bg-gray-200 w-[25%] py-2 hidden">
                     <h3 class="opacity-75">Seu link vai durar 5 minutos</h3>
                     <h1 class="text-xl pt-2">
-                        <span id="newLink" class="font-bold"
-                            >127.0.0.1:8080/HGSluhs</span
-                        >
+                        <span id="newLink" class="font-bold"></span>
                         <button
                             onclick="copyTxt()"
                             class="ps-2 cursor-pointer hover:opacity-75 transition-all"

@@ -59,9 +59,9 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     public ResponseLinkDTO createLink(LinkEntity linkEntity) {
-        if (!ValidationComponent.checkValidUrl(linkEntity.getUrl())) {
-            throw new InvalidAttributesException("Invalid link url");
-        }
+//        if (!ValidationComponent.checkValidUrl(linkEntity.getUrl())) {
+//            throw new InvalidAttributesException("Invalid link url");
+//        }
         LinkEntity saved = repository.save(linkEntity);
         return new ResponseLinkDTO(domain + hashids.encode(saved.getId()));
     }
