@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueCustomValidator.class)
 public @interface UniqueColumn {
-    String message() default "Column is need to be unique";
+    String message() default "Column must be unique";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
