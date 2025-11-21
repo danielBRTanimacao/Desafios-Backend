@@ -1,7 +1,7 @@
 package daniel.shortLink.controllers;
 
-import daniel.shortLink.DTO.RequestLinkDTO;
-import daniel.shortLink.DTO.ResponseLinkDTO;
+import daniel.shortLink.utils.DTO.RequestLinkDTO;
+import daniel.shortLink.utils.DTO.ResponseLinkDTO;
 import daniel.shortLink.entity.LinkEntity;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package daniel.shortLink.DTO;
+package daniel.shortLink.utils.DTO;
 
 public record ResponseLinkDTO(
         String url

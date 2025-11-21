@@ -1,7 +1,7 @@
 package daniel.shortLink.controllers.impl;
 
-import daniel.shortLink.DTO.RequestLinkDTO;
-import daniel.shortLink.DTO.ResponseLinkDTO;
+import daniel.shortLink.utils.DTO.RequestLinkDTO;
+import daniel.shortLink.utils.DTO.ResponseLinkDTO;
 import daniel.shortLink.controllers.LinkController;
 import daniel.shortLink.entity.LinkEntity;
 import daniel.shortLink.service.LinkService;
@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class LinkControllerImpl implements LinkController {
