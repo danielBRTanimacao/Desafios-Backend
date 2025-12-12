@@ -1,5 +1,6 @@
 package daniel.piece.meta;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -54,5 +55,9 @@ public abstract class Piece {
 
     public int getY(int row) {
         return row * Board.SQUARE_SIZE;
+    }
+
+    public void drawn(Graphics2D graph2d) {
+        graph2d.drawImage(img, x, y, Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
     }
 }
