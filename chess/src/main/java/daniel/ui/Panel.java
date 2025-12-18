@@ -2,6 +2,7 @@ package daniel.ui;
 
 import javax.swing.JPanel;
 
+import daniel.event.Mouse;
 import daniel.piece.Bishop;
 import daniel.piece.King;
 import daniel.piece.Knight;
@@ -10,6 +11,7 @@ import daniel.piece.Queen;
 import daniel.piece.Rook;
 import daniel.piece.meta.Piece;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -22,17 +24,25 @@ public class Panel extends JPanel implements Runnable {
     final int FPS = 60;
     Thread gameThread;
     Board board = new Board();
+    Mouse mouse = new Mouse();
 
     public static ArrayList<Piece> pieces = new ArrayList<>();
     public static ArrayList<Piece> simPieces = new ArrayList<>();
+    Piece activePiece;
 
     public static final int WHITE = 0;
     public static final int BLACK = 1;
     int currentColor = WHITE;
 
+    boolean canMove;
+    boolean validSquare;
+
     public Panel() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.BLACK);
+
+        addMouseMotionListener(mouse);
+        addMouseListener(mouse);
 
         setPieces();
         copyPiece(pieces, simPieces);
@@ -58,6 +68,39 @@ public class Panel extends JPanel implements Runnable {
             }
         }
 
+    }
+
+    private void update() {
+        if (mouse.pressed) {
+            if (activePiece == null) {
+                for (Piece piece : simPieces) {
+                    if (piece.color == currentColor && 
+                        piece.col == mouse.x/Board.SQUARE_SIZE && 
+                        piece.row == mouse.y/Board.SQUARE_SIZE) {
+                        
+                            activePiece = piece;
+                    }
+                }
+            } else {
+                simulate();
+            }
+        }
+
+        if (mouse.pressed == false) {
+            if (activePiece != null) {
+                activePiece.updatePosition();
+                activePiece = null;
+            }
+        }
+    }
+
+    private void simulate() {
+        canMove = false;
+        validSquare = false;
+        activePiece.x = mouse.x - Board.HALF_SQUARE_SIZE;
+        activePiece.y = mouse.y - Board.HALF_SQUARE_SIZE;
+        activePiece.col = activePiece.getCol(activePiece.x);
+        activePiece.row = activePiece.getRow(activePiece.y);
     }
 
     public void launchGame() {
@@ -106,10 +149,6 @@ public class Panel extends JPanel implements Runnable {
         }
     }
 
-    private void update() {
-
-    }
-
     public void paintComponent(Graphics graph) {
         super.paintComponent(graph);
         Graphics2D graph2d = (Graphics2D) graph;
@@ -118,6 +157,16 @@ public class Panel extends JPanel implements Runnable {
 
         for (Piece piece : simPieces) {
             piece.drawn(graph2d);
+        }
+
+        if (activePiece !=  null) {
+            graph2d.setColor(Color.white);
+            graph2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f));
+            graph2d.fillRect(activePiece.col * Board.SQUARE_SIZE, activePiece.row * Board.SQUARE_SIZE, 
+                Board.SQUARE_SIZE, Board.SQUARE_SIZE);
+            graph2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+            activePiece.drawn(graph2d);
         }
     }
 
