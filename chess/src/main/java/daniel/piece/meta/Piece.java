@@ -14,6 +14,7 @@ public abstract class Piece {
     public int x, y;
     public int col, row, preCol, preRow;
     public int color;
+    public Piece hitting;
 
     protected abstract String getPieceFileName();
 
@@ -65,6 +66,22 @@ public abstract class Piece {
         return (y + Board.HALF_SQUARE_SIZE) / Board.SQUARE_SIZE;
     }
 
+    public int getIndex() {
+        for (int i = 0; i < Panel.simPieces.size(); i++) {
+            if (Panel.simPieces.get(i) == this) {
+                return i;
+            }
+        }
+        return 0;
+    }
+    
+    public void resetPosition() {
+        col = preCol;
+        row = preRow;
+        x = getX(col);
+        y = getY(row);
+    }
+
     public void updatePosition() {
         x = getX(col);
         y = getY(row);
@@ -79,6 +96,30 @@ public abstract class Piece {
     public boolean isWithinBoard(int targetCol, int targetRow) {
         if (targetCol >= 0 && targetCol <= 7 && targetRow >= 0 && targetRow <= 7) {
             return true;
+        }
+        return false;
+    }
+
+    public Piece getHitting(int targetCol, int targetRow) {
+        for (Piece piece : Panel.simPieces) {
+            if (piece.col == targetCol && piece.row == targetRow && piece != null) {
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public boolean isValidSquare(int targetCol, int targetRow)  {
+        hitting = getHitting(targetCol, targetRow);
+
+        if (hitting == null) {
+            return true;
+        } else {
+            if (hitting.color != this.color) {
+                return true;
+            } else {
+                hitting = null;
+            }
         }
         return false;
     }

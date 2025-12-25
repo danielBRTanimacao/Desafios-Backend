@@ -88,8 +88,14 @@ public class Panel extends JPanel implements Runnable {
 
         if (mouse.pressed == false) {
             if (activePiece != null) {
-                activePiece.updatePosition();
-                activePiece = null;
+                if (validSquare) {
+                    copyPiece(simPieces, pieces);
+                    activePiece.updatePosition();
+                } else {
+                    copyPiece(simPieces, pieces);
+                    activePiece.resetPosition();
+                    activePiece = null;
+                }
             }
         }
     }
@@ -97,10 +103,23 @@ public class Panel extends JPanel implements Runnable {
     private void simulate() {
         canMove = false;
         validSquare = false;
+
+        copyPiece(simPieces, pieces);
+
         activePiece.x = mouse.x - Board.HALF_SQUARE_SIZE;
         activePiece.y = mouse.y - Board.HALF_SQUARE_SIZE;
         activePiece.col = activePiece.getCol(activePiece.x);
         activePiece.row = activePiece.getRow(activePiece.y);
+
+        if (activePiece.canMove(activePiece.col, activePiece.row)) {
+            canMove = true;
+
+            if (activePiece.hitting != null) {
+                simPieces.remove(activePiece.hitting.getIndex());
+            }
+
+            validSquare =  true;
+        }
     }
 
     public void launchGame() {
@@ -160,11 +179,13 @@ public class Panel extends JPanel implements Runnable {
         }
 
         if (activePiece !=  null) {
-            graph2d.setColor(Color.white);
-            graph2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f));
-            graph2d.fillRect(activePiece.col * Board.SQUARE_SIZE, activePiece.row * Board.SQUARE_SIZE, 
-                Board.SQUARE_SIZE, Board.SQUARE_SIZE);
-            graph2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            if (canMove) {
+                graph2d.setColor(Color.white);
+                graph2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f));
+                graph2d.fillRect(activePiece.col * Board.SQUARE_SIZE, activePiece.row * Board.SQUARE_SIZE, 
+                    Board.SQUARE_SIZE, Board.SQUARE_SIZE);
+                graph2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            }
 
             activePiece.drawn(graph2d);
         }
