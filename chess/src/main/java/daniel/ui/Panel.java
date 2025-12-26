@@ -92,10 +92,10 @@ public class Panel extends JPanel implements Runnable {
                     copyPiece(simPieces, pieces);
                     activePiece.updatePosition();
                 } else {
-                    copyPiece(simPieces, pieces);
+                    copyPiece(pieces, simPieces);
                     activePiece.resetPosition();
-                    activePiece = null;
                 }
+                activePiece = null;
             }
         }
     }
@@ -104,7 +104,7 @@ public class Panel extends JPanel implements Runnable {
         canMove = false;
         validSquare = false;
 
-        copyPiece(simPieces, pieces);
+        copyPiece(pieces, simPieces);
 
         activePiece.x = mouse.x - Board.HALF_SQUARE_SIZE;
         activePiece.y = mouse.y - Board.HALF_SQUARE_SIZE;
