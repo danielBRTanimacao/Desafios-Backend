@@ -109,7 +109,7 @@ public abstract class Piece {
 
     public Piece getHitting(int targetCol, int targetRow) {
         for (Piece piece : Panel.simPieces) {
-            if (piece.col == targetCol && piece.row == targetRow && piece != null) {
+            if (piece.col == targetCol && piece.row == targetRow && piece != this) {
                 return piece;
             }
         }
