@@ -107,15 +107,6 @@ public abstract class Piece {
         return false;
     }
 
-    public Piece getHitting(int targetCol, int targetRow) {
-        for (Piece piece : Panel.simPieces) {
-            if (piece.col == targetCol && piece.row == targetRow && piece != this) {
-                return piece;
-            }
-        }
-        return null;
-    }
-
     public boolean isValidSquare(int targetCol, int targetRow)  {
         hitting = getHitting(targetCol, targetRow);
 
@@ -129,6 +120,19 @@ public abstract class Piece {
             }
         }
         return false;
+    }
+
+    public boolean pieceIsOnStraightLine(int targetCol, int targetRow) {
+        return false;
+    }
+
+    public Piece getHitting(int targetCol, int targetRow) {
+        for (Piece piece : Panel.simPieces) {
+            if (piece.col == targetCol && piece.row == targetRow && piece != this) {
+                return piece;
+            }
+        }
+        return null;
     }
 
     public void drawn(Graphics2D graph2d) {
