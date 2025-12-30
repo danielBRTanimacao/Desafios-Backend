@@ -123,6 +123,38 @@ public abstract class Piece {
     }
 
     public boolean pieceIsOnStraightLine(int targetCol, int targetRow) {
+        for(int c = preCol - 1; c > targetCol; c--) {
+            for(Piece piece: Panel.simPieces) {
+                if (piece.col == c && piece.row == targetRow) {
+                    hitting = piece;
+                    return true;
+                }
+            }
+        }
+        for(int c = preCol + 1; c < targetCol; c++) {
+            for(Piece piece: Panel.simPieces) {
+                if (piece.col == c && piece.row == targetRow) {
+                    hitting = piece;
+                    return true;
+                }
+            }
+        }
+        for(int r = preRow - 1; r > targetRow; r--) {
+            for(Piece piece: Panel.simPieces) {
+                if (piece.col == targetCol && piece.row == r) {
+                    hitting = piece;
+                    return true;
+                }
+            }
+        }
+        for(int r = preRow + 1; r < targetRow; r++) {
+            for(Piece piece: Panel.simPieces) {
+                if (piece.col == targetCol && piece.row == r) {
+                    hitting = piece;
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
