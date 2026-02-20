@@ -158,6 +158,10 @@ public abstract class Piece {
         return false;
     }
 
+    public boolean isPieceOnDiagonal() {
+        return true;
+    }
+
     public Piece getHitting(int targetCol, int targetRow) {
         for (Piece piece : Panel.simPieces) {
             if (piece.col == targetCol && piece.row == targetRow && piece != this) {
