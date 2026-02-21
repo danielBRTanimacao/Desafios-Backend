@@ -158,8 +158,14 @@ public abstract class Piece {
         return false;
     }
 
-    public boolean isPieceOnDiagonal() {
-        return true;
+    public boolean isPieceOnDiagonal(int targetCol, int targetRow) {
+        if (targetRow < preRow) {
+            
+        } 
+        if (targetRow > preRow) {
+            
+        }
+        return false;
     }
 
     public Piece getHitting(int targetCol, int targetRow) {
