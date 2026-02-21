@@ -160,7 +160,15 @@ public abstract class Piece {
 
     public boolean isPieceOnDiagonal(int targetCol, int targetRow) {
         if (targetRow < preRow) {
-            
+            for (int c = preCol - 1; c > targetCol; c--) {
+                int diff = Math.abs(c - preCol);
+                for (Piece piece : Panel.simPieces) {
+                    if (piece.col == c && piece.row == preRow - diff) {
+                        hitting = piece;
+                        return true;
+                    }
+                }
+            }
         } 
         if (targetRow > preRow) {
             
